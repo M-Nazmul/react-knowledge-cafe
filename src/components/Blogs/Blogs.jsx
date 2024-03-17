@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Blog from "../Blog/Blog";
+import { PropTypes } from 'prop-types';
 
-const Blogs = () => {
+const Blogs = ({handleAddToBookmark}) => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() =>{
@@ -11,14 +12,19 @@ const Blogs = () => {
         .then(data => setBlogs(data))
     } ,[])
     return (
-        <div className="max-w-[1280px] mx-auto py-3 px-6">
+        <div className="max-w-[1280px] mx-auto py-3 md:px-6">
             
             {
                 blogs.map( blog => <Blog key={blog.id}
-                 blog = {blog}></Blog>)
+                 blog = {blog}
+                 handleAddToBookmark={handleAddToBookmark}
+                 ></Blog>)
             }
         </div>
     );
 };
 
+Blogs.propTypes = {
+    handleAddToBookmark: PropTypes.func
+}
 export default Blogs;
